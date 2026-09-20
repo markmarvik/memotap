@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#1a1a2e" />
+  <title>MemoTap — Visual Memo Unlock</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="app" class="skin-playful">
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo" aria-hidden="true">🔐</span>
+        <h1>MemoTap</h1>
+      </div>
+      <button type="button" id="skinToggle" class="chip" title="Toggle skin" aria-label="Toggle terminal skin">✨ Playful</button>
+    </header>
+
+    <main id="screens">
+      <!-- Welcome / Setup -->
+      <section id="screen-welcome" class="screen active" aria-labelledby="welcome-title">
+        <div class="hero">
+          <div class="hero-art" aria-hidden="true">🧠✨</div>
+          <h2 id="welcome-title">Remember with taps</h2>
+          <p class="lede">Pick a short sequence of friendly objects. That’s your visual memo — no passwords to type.</p>
+        </div>
+        <div class="card tips">
+          <p><strong>How it works</strong></p>
+          <ol>
+            <li>Tap <strong>4–6</strong> objects in order</li>
+            <li>Lock your vault</li>
+            <li>Unlock by tapping the same path among decoys</li>
+          </ol>
+        </div>
+        <button type="button" id="btnStartSetup" class="btn primary btn-lg">Set my memo</button>
+        <button type="button" id="btnTryUnlock" class="btn ghost" hidden>Unlock vault</button>
+      </section>
+
+      <!-- Setup: record sequence -->
+      <section id="screen-setup" class="screen" aria-labelledby="setup-title">
+        <h2 id="setup-title">Create your memo</h2>
+        <p class="hint" id="setupHint">Tap <strong>4–6</strong> objects in a memorable order.</p>
+        <div class="progress-dots" id="setupDots" aria-live="polite"></div>
+        <div class="scene" id="setupScene" role="group" aria-label="Memo objects"></div>
+        <div class="actions">
+          <button type="button" id="btnSetupUndo" class="btn ghost" disabled>Undo</button>
+          <button type="button" id="btnSetupClear" class="btn ghost">Clear</button>
+          <button type="button" id="btnSetupDone" class="btn primary" disabled>Lock it in</button>
+        </div>
+      </section>
+
+      <!-- Confirm setup -->
+      <section id="screen-confirm" class="screen" aria-labelledby="confirm-title">
+        <h2 id="confirm-title">Confirm once</h2>
+        <p class="hint">Tap the same sequence again to lock your vault.</p>
+        <div class="progress-dots" id="confirmDots" aria-live="polite"></div>
+        <div class="scene" id="confirmScene" role="group" aria-label="Confirm memo"></div>
+        <div class="actions">
+          <button type="button" id="btnConfirmBack" class="btn ghost">Back</button>
+          <button type="button" id="btnConfirmClear" class="btn ghost">Clear</button>
+        </div>
+        <p class="status" id="confirmStatus" role="status"></p>
+      </section>
+
+      <!-- Unlock -->
+      <section id="screen-unlock" class="screen" aria-labelledby="unlock-title">
+        <h2 id="unlock-title">Unlock</h2>
+        <p class="hint">Tap your memo path. Decoys are mixed in.</p>
+        <div class="progress-dots" id="unlockDots" aria-live="polite"></div>
+        <div class="scene dense" id="unlockScene" role="group" aria-label="Unlock scene"></div>
+        <div class="actions">
+          <button type="button" id="btnUnlockClear" class="btn ghost">Clear</button>
+          <button type="button" id="btnResetAll" class="btn danger-ghost">Reset demo</button>
+        </div>
+        <p class="status" id="unlockStatus" role="status"></p>
+      </section>
+
+      <!-- Vault -->
+      <section id="screen-vault" class="screen" aria-labelledby="vault-title">
+        <div class="vault-header">
+          <h2 id="vault-title">Your vault</h2>
+          <button type="button" id="btnLock" class="btn primary">🔒 Lock</button>
+        </div>
+        <p class="hint muted">Demo accounts — stored encrypted in this browser only.</p>
+        <ul class="vault-list" id="vaultList"></ul>
+        <button type="button" id="btnRevealAll" class="btn ghost btn-sm">Reveal all secrets</button>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <span>Local-only · Web Crypto · No backend</span>
+    </footer>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>
